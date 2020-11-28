@@ -7,6 +7,9 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
     /**
