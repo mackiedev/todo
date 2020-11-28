@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- *
+ * Home Activity.
  */
 public class HomeActivity extends AppCompatActivity {
 
