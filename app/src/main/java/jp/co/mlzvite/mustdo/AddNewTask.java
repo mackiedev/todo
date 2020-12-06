@@ -21,12 +21,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Objects;
 
-import jp.co.mlzvite.mustdo.model.ToDoModel;
+import jp.co.mlzvite.mustdo.model.MustDoModel;
 import jp.co.mlzvite.mustdo.utils.DataBaseHandler;
 
 public class AddNewTask extends BottomSheetDialogFragment {
     public static final String TAG = "ActionBottomDialog";
-
     private EditText newTaskText;
     private Button newTaskSaveButton;
     private DataBaseHandler db;
@@ -45,7 +44,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.new_task, container, false);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        Objects.requireNonNull(getDialog()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return view;
     }
 
@@ -103,7 +102,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
                 if (finalIsUpdate) {
                     db.updateTask(bundle.getInt("id"), text);
                 } else {
-                    final ToDoModel task = new ToDoModel();
+                    final MustDoModel task = new MustDoModel();
                     task.setTask(text);
                     task.setStatus(0);
                     db.insertTask(task);

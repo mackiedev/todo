@@ -16,18 +16,15 @@ import java.util.List;
 import jp.co.mlzvite.mustdo.AddNewTask;
 import jp.co.mlzvite.mustdo.MainActivity;
 import jp.co.mlzvite.mustdo.R;
-import jp.co.mlzvite.mustdo.model.ToDoModel;
+import jp.co.mlzvite.mustdo.model.MustDoModel;
 import jp.co.mlzvite.mustdo.utils.DataBaseHandler;
 
-/**
- *
- */
-public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
-    private List<ToDoModel> todoList;
+public class MustDoAdapter extends RecyclerView.Adapter<MustDoAdapter.ViewHolder> {
+    private List<MustDoModel> todoList;
     private final DataBaseHandler db;
     private final MainActivity activity;
 
-    public ToDoAdapter(@NonNull final DataBaseHandler db, @NonNull final MainActivity activity) {
+    public MustDoAdapter(@NonNull final DataBaseHandler db, @NonNull final MainActivity activity) {
         this.db = db;
         this.activity = activity;
     }
@@ -42,8 +39,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         db.openDatabase();
-
-        final ToDoModel item = todoList.get(position);
+        final MustDoModel item = todoList.get(position);
         holder.task.setText(item.getTask());
         holder.task.setChecked(toBoolean(item.getStatus()));
         holder.task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -71,20 +67,20 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         return activity;
     }
 
-    public void setTasks(List<ToDoModel> todoList) {
+    public void setTasks(List<MustDoModel> todoList) {
         this.todoList = todoList;
         notifyDataSetChanged();
     }
 
     public void deleteItem(int position) {
-        final ToDoModel item = todoList.get(position);
+        final MustDoModel item = todoList.get(position);
         db.deleteTask(item.getId());
         todoList.remove(position);
         notifyItemRemoved(position);
     }
 
     public void editItem(int position) {
-        final ToDoModel item = todoList.get(position);
+        final MustDoModel item = todoList.get(position);
         final Bundle bundle = new Bundle();
         bundle.putInt("id", item.getId());
         bundle.putString("task", item.getTask());
@@ -96,7 +92,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CheckBox task;
-
         ViewHolder(View view) {
             super(view);
             task = view.findViewById(R.id.todoCheckBox);

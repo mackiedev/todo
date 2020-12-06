@@ -13,17 +13,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import jp.co.mlzvite.mustdo.adapter.ToDoAdapter;
+import jp.co.mlzvite.mustdo.adapter.MustDoAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
+    private final MustDoAdapter adapter;
 
-    private ToDoAdapter adapter;
-
-    public RecyclerItemTouchHelper(ToDoAdapter adapter) {
+    public RecyclerItemTouchHelper(MustDoAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
     }
-
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -34,7 +32,7 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
         final int position = viewHolder.getAdapterPosition();
         if (direction == ItemTouchHelper.LEFT) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(adapter.getContext());
+            final AlertDialog.Builder builder = new AlertDialog.Builder(adapter.getContext());
             builder.setTitle(R.string.delete_task_dialog_title);
             builder.setMessage(R.string.delete_task_question);
             builder.setPositiveButton(android.R.string.yes,
@@ -51,7 +49,6 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
                 }
             });
             builder.setCancelable(false);
-
             final AlertDialog dialog = builder.create();
             dialog.show();
         } else {
@@ -62,11 +59,9 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-
         Drawable icon;
         ColorDrawable background;
-
-        View itemView = viewHolder.itemView;
+        final View itemView = viewHolder.itemView;
         int backgroundCornerOffset = 20;
 
         if (dX > 0) {
@@ -78,20 +73,20 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         }
 
         assert icon != null;
-        int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
-        int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
-        int iconBottom = iconTop + icon.getIntrinsicHeight();
+        final int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+        final int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+        final int iconBottom = iconTop + icon.getIntrinsicHeight();
 
         if (dX > 0) { // Swiping to the right
-            int iconLeft = itemView.getLeft() + iconMargin;
-            int iconRight = itemView.getLeft() + iconMargin + icon.getIntrinsicWidth();
+            final int iconLeft = itemView.getLeft() + iconMargin;
+            final int iconRight = itemView.getLeft() + iconMargin + icon.getIntrinsicWidth();
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
 
             background.setBounds(itemView.getLeft(), itemView.getTop(),
                     itemView.getLeft() + ((int) dX) + backgroundCornerOffset, itemView.getBottom());
         } else if (dX < 0) { // Swiping to the left
-            int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
-            int iconRight = itemView.getRight() - iconMargin;
+            final int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
+            final int iconRight = itemView.getRight() - iconMargin;
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
 
             background.setBounds(itemView.getRight() + ((int) dX) - backgroundCornerOffset,
@@ -99,7 +94,6 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         } else { // view is unSwiped
             background.setBounds(0, 0, 0, 0);
         }
-
         background.draw(c);
         icon.draw(c);
     }

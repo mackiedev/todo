@@ -1,16 +1,7 @@
 package jp.co.mlzvite.mustdo.model;
 
-/**
- *
- */
-public class ToDoModel {
-    /**
-     *
-     */
+public class MustDoModel {
     private int id, status;
-    /**
-     *
-     */
     private String task;
 
     public int getId() {

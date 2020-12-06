@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.co.mlzvite.mustdo.model.ToDoModel;
+import jp.co.mlzvite.mustdo.model.MustDoModel;
 
 /**
  *
@@ -74,15 +74,15 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
     }
 
-    public void insertTask(final ToDoModel task) {
+    public void insertTask(final MustDoModel task) {
         final ContentValues cv = new ContentValues();
         cv.put(TASK, task.getTask());
         cv.put(STATUS, 0);
         db.insert(TODO_TABLE, null, cv);
     }
 
-    public List<ToDoModel> getAllTasks() {
-        final List<ToDoModel> taskList = new ArrayList<>();
+    public List<MustDoModel> getAllTasks() {
+        final List<MustDoModel> taskList = new ArrayList<>();
         Cursor cur = null;
         db.beginTransaction();
         try {
@@ -90,7 +90,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             if (cur != null) {
                 if (cur.moveToFirst()) {
                     do {
-                        final ToDoModel task = new ToDoModel();
+                        final MustDoModel task = new MustDoModel();
                         task.setId(cur.getInt(cur.getColumnIndex(ID)));
                         task.setTask(cur.getString(cur.getColumnIndex(TASK)));
                         task.setStatus(cur.getInt(cur.getColumnIndex(STATUS)));

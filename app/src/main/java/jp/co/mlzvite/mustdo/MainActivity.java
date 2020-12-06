@@ -14,31 +14,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Collections;
 import java.util.List;
 
-import jp.co.mlzvite.mustdo.adapter.ToDoAdapter;
-import jp.co.mlzvite.mustdo.model.ToDoModel;
+import jp.co.mlzvite.mustdo.adapter.MustDoAdapter;
+import jp.co.mlzvite.mustdo.model.MustDoModel;
 import jp.co.mlzvite.mustdo.utils.DataBaseHandler;
 
-/**
- *
- */
-public class MainActivity extends AppCompatActivity implements DialogCloseListener {
-    /**
-     *
-     */
+public final  class MainActivity extends AppCompatActivity implements DialogCloseListener {
     private DataBaseHandler db;
-    /**
-     *
-     */
-    private ToDoAdapter tasksAdapter;
-    /**
-     *
-     */
-    private FloatingActionButton fab;
-    /**
-     *
-     */
-    private List<ToDoModel> taskList;
-
+    private MustDoAdapter tasksAdapter;
+    private List<MustDoModel> taskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +33,13 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
         final RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        tasksAdapter = new ToDoAdapter(db, MainActivity.this);
+        tasksAdapter = new MustDoAdapter(db, MainActivity.this);
         tasksRecyclerView.setAdapter(tasksAdapter);
 
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
-        fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
 
         taskList = db.getAllTasks();
         Collections.reverse(taskList);

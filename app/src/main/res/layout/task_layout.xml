@@ -11,11 +11,10 @@
 
         <CheckBox
             android:id="@+id/todoCheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:buttonTint="@android:color/darker_gray"
-            android:paddingStart="8dp"
-            tools:text="Go to the market and bring vegetables immediately today." />
+            android:paddingStart="8dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
