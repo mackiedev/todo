@@ -66,11 +66,10 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
         if (dX > 0) {
             icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_edit);
-            background = new ColorDrawable(Color.BLUE);
         } else {
             icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_delete);
-            background = new ColorDrawable(Color.RED);
         }
+        background = new ColorDrawable(Color.LTGRAY);
 
         assert icon != null;
         final int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
