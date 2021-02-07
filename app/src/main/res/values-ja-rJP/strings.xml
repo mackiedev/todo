@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save">保存</string>
+    <string name="new_task">新しいタスク</string>
+    <string name="delete_task_dialog_title">タスクの削除</string>
+    <string name="delete_task_question">このタスクを削除してもよろしいですか？</string>
+</resources>
